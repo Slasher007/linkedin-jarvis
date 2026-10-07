@@ -1,0 +1,435 @@
+/* ============================================================
+   JARVIS NETWORK SCANNER - Dashboard Styles
+   Sci-fi / Matrix / Futuristic HUD aesthetic
+   ============================================================ */
+
+:root {
+  --bg: #020806;
+  --panel-bg: rgba(0, 18, 12, 0.85);
+  --border: #00ff9f;
+  --border-dim: rgba(0, 255, 159, 0.25);
+  --accent: #00ff9f;
+  --accent-cyan: #00e5ff;
+  --text: #b8ffd9;
+  --text-dim: #4a8f6e;
+  --danger: #ff3366;
+  --warning: #ffcc00;
+  --font: "Courier New", "Lucida Console", "Consolas", monospace;
+  --glow: 0 0 12px rgba(0, 255, 159, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  overflow: hidden;
+}
+
+/* ---------- Matrix Rain Background ---------- */
+.matrix-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.matrix-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- HUD Container ---------- */
+.hud {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 12px;
+}
+
+/* ---------- Header ---------- */
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border-dim);
+  border-left: 4px solid var(--accent);
+  box-shadow: var(--glow);
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.logo-bracket {
+  color: var(--accent-cyan);
+  font-size: 1.4rem;
+  text-shadow: 0 0 10px var(--accent-cyan);
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: var(--accent);
+  text-shadow: 0 0 15px var(--accent);
+}
+
+.logo-sub {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  margin-left: 10px;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.status-dot.searching {
+  background: var(--warning);
+  box-shadow: 0 0 8px var(--warning);
+}
+
+.status-dot.error {
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+}
+
+.timestamp {
+  color: var(--text-dim);
+  margin-left: 16px;
+}
+
+/* ---------- Grid ---------- */
+.hud-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  gap: 12px;
+  min-height: 0;
+}
+
+/* ---------- Panels ---------- */
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-dim);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.6;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-dim);
+  background: rgba(0, 255, 159, 0.04);
+}
+
+.panel-title {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-shadow: 0 0 6px var(--accent);
+}
+
+.refresh-btn {
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--accent);
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.panel-body::-webkit-scrollbar {
+  width: 6px;
+}
+.panel-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel-body::-webkit-scrollbar-thumb {
+  background: var(--border-dim);
+  border-radius: 3px;
+}
+
+.placeholder {
+  color: var(--text-dim);
+  font-style: italic;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ---------- Target Panel ---------- */
+.target-name {
+  font-size: 1.3rem;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px var(--accent-cyan);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.target-field {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.target-label {
+  color: var(--text-dim);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.target-value {
+  color: var(--text);
+  word-break: break-all;
+}
+
+/* ---------- Results Panel ---------- */
+.result-card {
+  border: 1px solid var(--border-dim);
+  padding: 12px;
+  margin-bottom: 12px;
+  background: rgba(0, 255, 159, 0.03);
+  position: relative;
+}
+
+.result-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+
+.result-card h3 {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.result-card p {
+  color: var(--text);
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  max-height: 160px;
+  overflow: hidden;
+}
+
+.no-results {
+  color: var(--warning);
+  text-align: center;
+  padding: 30px;
+}
+
+/* ---------- Log Panel ---------- */
+.log-body {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.log-line {
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.log-line.info {
+  color: var(--accent);
+}
+
+.log-line.warn {
+  color: var(--warning);
+}
+
+.log-line.error {
+  color: var(--danger);
+}
+
+/* ---------- Footer ---------- */
+.hud-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border-dim);
+  letter-spacing: 1px;
+}
+
+kbd {
+  background: rgba(0, 255, 159, 0.15);
+  border: 1px solid var(--border-dim);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+/* ---------- Animations ---------- */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-body > * {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .hud-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+/* ---------- Minimized mode (ESC) ---------- */
+body.minimized .hud {
+  display: none;
+}
+
+.restore-chip {
+  display: none;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  padding: 10px 16px;
+  background: var(--panel-bg);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: var(--glow);
+}
+
+body.minimized .restore-chip {
+  display: block;
+}
+
+.restore-chip:hover {
+  background: rgba(0, 255, 159, 0.15);
+}
+
+/* ---------- BrixHub dossier ---------- */
+.dossier-name {
+  color: var(--accent-cyan);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.kv {
+  display: flex;
+  gap: 10px;
+  padding: 3px 0;
+  border-bottom: 1px dashed rgba(0, 255, 159, 0.12);
+}
+.kv:last-child { border-bottom: 0; }
+
+.kv-k {
+  color: var(--text-dim);
+  flex: 0 0 40%;
+  min-width: 0;
+}
+.kv-v {
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.household {
+  border: 1px solid var(--border-dim);
+  padding: 8px 10px;
+  margin-top: 8px;
+  background: rgba(0, 255, 159, 0.03);
+}
+.household-addr {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.household-meta {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  margin-top: 2px;
+}
+.household-members {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+.household-members li {
+  color: var(--text);
+  font-size: 0.75rem;
+  padding: 2px 0 2px 10px;
+  border-left: 2px solid var(--border-dim);
+  margin-top: 3px;
+  word-break: break-word;
+}

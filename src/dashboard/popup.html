@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jarvis</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 280px;
+      background: #020806;
+      color: #b8ffd9;
+      font-family: "Courier New", monospace;
+      padding: 16px;
+      border: 1px solid #00ff9f44;
+    }
+    h1 {
+      font-size: 1rem;
+      color: #00ff9f;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px #00ff9f;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 0.75rem;
+      color: #4a8f6e;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid #00ff9f;
+      color: #00ff9f;
+      font-family: inherit;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover {
+      background: rgba(0, 255, 159, 0.15);
+      box-shadow: 0 0 12px #00ff9f66;
+    }
+    .status {
+      font-size: 0.7rem;
+      margin-top: 12px;
+      color: #00e5ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>[ JARVIS ]</h1>
+  <p>
+    Hover any person card on LinkedIn Grow for 3+ seconds to auto-search on BrixHub.
+  </p>
+  <button id="openDash">OPEN FULL DASHBOARD</button>
+  <div class="status" id="status">System online</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

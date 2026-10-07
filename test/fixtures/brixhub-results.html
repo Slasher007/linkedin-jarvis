@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BrixHub | Results</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 24px; }
+    .search-results { display: grid; gap: 12px; }
+    .result-card { border: 1px solid #ddd; padding: 12px; }
+    .search-result h3 { margin: 0 0 4px; }
+  </style>
+</head>
+<body>
+  <h1>Search results</h1>
+
+  <!-- Outer wrapper also matches [class*='result']/[class*='card'] selectors:
+       the scraper must keep only leaf cards, not duplicate the wrapper. -->
+  <div class="search-results card">
+    <div class="result-card">
+      <div class="search-result">
+        <h3>Ada Lovelace</h3>
+        <p>Mathematician at Analytical Engine Labs</p>
+      </div>
+    </div>
+    <div class="result-card">
+      <div class="search-result">
+        <h3>A. Lovelace</h3>
+        <p>Software Engineer at Ada Inc</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>People you may know</h2>
+</body>
+</html>

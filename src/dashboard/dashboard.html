@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JARVIS // NETWORK SCANNER</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="matrix-bg" id="matrixBg"></div>
+
+  <button class="restore-chip" id="restoreChip" title="Restore HUD">
+    [ JARVIS MINIMIZED — CLICK OR PRESS ESC ]
+  </button>
+
+  <div class="hud">
+    <!-- Header -->
+    <header class="hud-header">
+      <div class="logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">JARVIS</span>
+        <span class="logo-bracket">]</span>
+        <span class="logo-sub">NETWORK SCANNER v1.0</span>
+      </div>
+      <div class="status-bar">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">SYSTEM ONLINE</span>
+        <span class="timestamp" id="clock"></span>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="hud-grid">
+      <!-- Left: Current Target -->
+      <section class="panel target-panel">
+        <div class="panel-header">
+          <span class="panel-title">◆ TARGET ACQUIRED</span>
+        </div>
+        <div class="panel-body" id="targetInfo">
+          <div class="placeholder">Awaiting target lock...</div>
+        </div>
+      </section>
+
+      <!-- Center: Results -->
+      <section class="panel results-panel">
+        <div class="panel-header">
+          <span class="panel-title">◆ INTEL FEED</span>
+          <button class="refresh-btn" id="refreshBtn" title="Refresh">↻</button>
+        </div>
+        <div class="panel-body" id="resultsFeed">
+          <div class="placeholder">No data stream active.</div>
+        </div>
+      </section>
+
+      <!-- Right: System Log -->
+      <section class="panel log-panel">
+        <div class="panel-header">
+          <span class="panel-title">◆ SYSTEM LOG</span>
+        </div>
+        <div class="panel-body log-body" id="systemLog">
+          <div class="log-line">> Initializing neural interface...</div>
+          <div class="log-line">> LinkedIn module loaded.</div>
+          <div class="log-line">> BrixHub interface ready.</div>
+          <div class="log-line">> Hover protocol armed (3.0s).</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="hud-footer">
+      <div class="footer-left">
+        PRESS <kbd>ESC</kbd> TO MINIMIZE • HOVER LINKEDIN CARDS ≥ 3s TO SCAN
+      </div>
+      <div class="footer-right" id="lastUpdate">LAST UPDATE: —</div>
+    </footer>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

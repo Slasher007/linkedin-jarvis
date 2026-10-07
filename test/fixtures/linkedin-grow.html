@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Network | Grow</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; margin: 0; }
+    .spacer { height: 600px; background: #f3f2ef; }
+    .artdeco-card {
+      display: flex; gap: 12px; align-items: center;
+      width: 300px; margin: 16px; padding: 16px;
+      border: 1px solid #e0dfdc; border-radius: 8px; background: #fff;
+    }
+    .artdeco-card img { width: 56px; height: 56px; border-radius: 50%; }
+    .headline { display: block; color: rgba(0,0,0,.6); font-size: 13px; }
+    .artdeco-entity-lockup__title { display: block; font-weight: 600; font-size: 15px; }
+  </style>
+</head>
+<body>
+  <div class="spacer">scroll spacer</div>
+
+  <!-- Headline appears BEFORE the name in document order: the extractor must
+       prefer the dedicated name selector over the generic span[dir=ltr] one. -->
+  <div class="artdeco-card" id="card-ada">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" />
+    <div>
+      <span dir="ltr" class="headline">Mathematician &middot; Analytical Engine Pioneer</span>
+      <div class="artdeco-entity-lockup__title">Ada Lovelace</div>
+      <a href="/in/ada-lovelace">View profile</a>
+    </div>
+  </div>
+
+  <!-- Name with pronoun suffix that must be cleaned -->
+  <div class="artdeco-card" id="card-grace">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" />
+    <div>
+      <div class="artdeco-entity-lockup__title">Grace Hopper (she/her)</div>
+      <span dir="ltr" class="headline">Rear Admiral &middot; US Navy</span>
+    </div>
+  </div>
+
+  <!-- Mononym: last name must be empty, not a failure -->
+  <div class="artdeco-card" id="card-cher">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" />
+    <div>
+      <div class="artdeco-entity-lockup__title">Cher</div>
+      <span dir="ltr" class="headline">Singer &middot; Actress</span>
+    </div>
+  </div>
+
+  <!-- No name anywhere: must report NAME NOT DETECTED -->
+  <div class="artdeco-card" id="card-anon">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" />
+    <div>
+      <button type="button">Connect</button>
+    </div>
+  </div>
+
+  <!-- BrixHub end-to-end test subject -->
+  <div class="artdeco-card" id="card-laura">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" />
+    <div>
+      <div class="artdeco-entity-lockup__title">laura tracqui</div>
+      <span dir="ltr" class="headline">Growth Lead &middot; Nova Labs</span>
+    </div>
+  </div>
+
+  <!-- Mimics current LinkedIn markup: no name class at all, the name is the
+       text of the profile permalink inside a plain <li>. -->
+  <ul class="scaffold-finite-scroll__content">
+    <li class="artdeco-list__item" id="card-linkonly">
+      <div class="relative">
+        <a href="/in/marcell-dupont" class="app-entity-lockup">
+          <span>marcell dupont</span>
+        </a>
+        <span dir="ltr">Senior Engineer &middot; Zenith</span>
+        <button type="button">Connect</button>
+      </div>
+    </li>
+
+    <!-- French UI: the "Show all" row must never be read as a person -->
+    <li class="artdeco-list__item" id="card-showall">
+      <a href="/mynetwork/grow/" class="see-more-link">Tout afficher</a>
+    </li>
+  </ul>
+
+  <!-- Verbatim copy of the current (React, hashed-class) LinkedIn person card:
+       no /in/ permalink, no semantic name class, name inside <p><span>. -->
+  <div class="dj9mgo dj9ia0 dj9al5 dj9h9w dj9jbo dj9hzw dj9ic8 dj9ido dj9mf5"
+       componentkey="auto-component-6d76174c-dfc3-4d78-8d71-23eeb6fb7d2a" id="card-leo">
+    <div class="dj9aph dj9gfh dj9hbx dj9mf5" aria-label="Léo est à l’écoute de nouvelles opportunités">
+      <figure class="dj9mi2 dj9aqd dj9hal dj9f9x dj9ko0 dj9jj4 dj9mf5" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" id="person-medium" viewBox="0 0 552 138" aria-hidden="true"><path fill="none" d="M0 0h552v138H0z"></path></svg>
+      </figure>
+      <figure class="dj9mi2 dj9mi5 dj9mi3 dj976 dj9ksy" aria-hidden="false">
+        <svg xmlns="http://www.w3.org/2000/svg" id="person-accent-4" aria-hidden="false" role="img" aria-label="Léo est à l’écoute de nouvelles opportunités"><path d="M0 0h128v128H0z"></path></svg>
+        <img class="dj9mix dj9miw dj9get dj9hal dj9mi0" fetchpriority="low"
+             alt="Léo est à l’écoute de nouvelles opportunités"
+             src="https://media.licdn.com/dms/image/v2/profile-framedphoto-shrink_400_400/B4EZXbV/0/1743141728545?e=1791910800&amp;v=beta" data-loaded="true">
+      </figure>
+    </div>
+    <div class="dj9mgo dj9ia0 dj9lle dj9lsy dj9lwq dj9al5 dj9h9w dj9ja0 dj9hys dj9ic8 dj9ido dj9hbx dj9mf5">
+      <div class="dj9ly6 dj9lzm dj9lzo dj9lzp dj9lzu dj9fbv dj9lz6">
+        <p class="dj9lz8 dj9lzb dj9l6s dj9l6q dj9l6p dj9aqd dj9lz7 dj9gfh dj9l6j"><span>Léo Kempf<span class="dj9lz5 dj9mf5"> </span><span class="dj9jk8 dj9amt dj9mf5" role="img" aria-label="Premium"><svg xmlns="http://www.w3.org/2000/svg" id="linkedin-bug-small" fill="currentColor" aria-hidden="true" width="16" height="16"><path d="M15 2v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1"></path></svg></span></span></p>
+      </div>
+      <div class="dj9ly6 dj9lzm dj9lzn dj9lzp dj9lzu dj9fcv dj9lz6">
+        <p class="dj9lz8 dj9lza dj9l6s dj9l6q dj9l6p dj9aqd dj9lz7 dj9gfh dj9l6j"><span>Bridging process engineering (Hutchinson) &amp; project management (Valeo). As an ISAT grad, I leverage cross-functional leadership.</span></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

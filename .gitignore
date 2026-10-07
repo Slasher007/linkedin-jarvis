@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Test certificates (generated via `npm run certs`)
+test/fixtures/key.pem
+test/fixtures/cert.pem
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/

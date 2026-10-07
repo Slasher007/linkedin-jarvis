@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>BrixHub | Recherche</title>
+</head>
+<body>
+  <!-- Variant seen on some BrixHub layouts: the primary button renders OUTSIDE
+       the <form>, so a form-scoped lookup would never find it. -->
+  <form class="brix-card" action="/results" method="get">
+    <label for="crit-nom_famille">Nom</label>
+    <input id="crit-nom_famille" class="brix-input" type="text" name="nom_famille" />
+    <label for="crit-prenom">Prénom</label>
+    <input id="crit-prenom" class="brix-input" type="text" name="prenom" />
+  </form>
+
+  <button type="submit" class="brix-btn brix-btn--primary" id="brix-submit">Rechercher</button>
+</body>
+</html>

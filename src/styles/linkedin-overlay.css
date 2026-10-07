@@ -1,0 +1,93 @@
+/* Jarvis Hover Overlay - Matrix / Sci-Fi style */
+
+.jarvis-hover-overlay {
+  border: 2px solid #00ff9f;
+  border-radius: 6px;
+  background: rgba(0, 20, 10, 0.75);
+  box-shadow:
+    0 0 12px #00ff9f,
+    0 0 24px rgba(0, 255, 159, 0.4),
+    inset 0 0 20px rgba(0, 255, 159, 0.15);
+  overflow: hidden;
+  font-family: "Courier New", "Lucida Console", monospace;
+  color: #00ff9f;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+  animation: jarvis-pulse 1.5s ease-in-out infinite;
+}
+
+.jarvis-hover-overlay.locked {
+  border-color: #00e5ff;
+  box-shadow:
+    0 0 18px #00e5ff,
+    0 0 36px rgba(0, 229, 255, 0.5),
+    inset 0 0 25px rgba(0, 229, 255, 0.2);
+  animation: jarvis-lock 0.4s ease-out;
+}
+
+.jarvis-hover-overlay.error {
+  border-color: #ff3366;
+  color: #ff3366;
+  box-shadow:
+    0 0 12px #ff3366,
+    0 0 24px rgba(255, 51, 102, 0.4);
+  animation: none;
+}
+
+.jarvis-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #00ff9f,
+    transparent
+  );
+  animation: jarvis-scan 1.8s linear infinite;
+  opacity: 0.8;
+}
+
+.jarvis-hover-overlay.locked .jarvis-scanline {
+  background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+}
+
+.jarvis-text {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px currentColor;
+  background: rgba(0, 0, 0, 0.55);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jarvis-progress {
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #00ff9f, #00e5ff);
+  box-shadow: 0 0 8px #00ff9f;
+}
+
+@keyframes jarvis-scan {
+  0% { transform: translateY(0); opacity: 0.9; }
+  50% { opacity: 0.4; }
+  100% { transform: translateY(200px); opacity: 0; }
+}
+
+@keyframes jarvis-pulse {
+  0%, 100% { box-shadow: 0 0 12px #00ff9f, 0 0 24px rgba(0, 255, 159, 0.3); }
+  50% { box-shadow: 0 0 18px #00ff9f, 0 0 36px rgba(0, 255, 159, 0.55); }
+}
+
+@keyframes jarvis-lock {
+  0% { transform: scale(1.05); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}

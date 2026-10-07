@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>BrixHub | Recherche</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 24px; }
+    .brix-input { padding: 8px; border: 1px solid #ccc; }
+    .brix-btn { padding: 9px 16px; border: 0; cursor: pointer; }
+    .brix-btn--primary { background: #111; color: #fff; }
+    .brix-card { border: 1px solid #333; padding: 16px; margin-top: 16px; }
+    .rounded-full { display: inline-block; border: 1px solid #555; border-radius: 999px; padding: 1px 8px; font-size: 11px; }
+    .font-medium { font-weight: 600; }
+    dl div { display: flex; gap: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Rechercher</h1>
+
+  <form aria-label="Critères de recherche" class="brix-card">
+    <header>
+      <h2>Critères de recherche</h2>
+      <p>Remplissez un ou plusieurs champs, puis lancez la recherche.</p>
+    </header>
+
+    <div>
+      <div>
+        <label for="crit-nom_famille">Nom</label>
+        <input id="crit-nom_famille" placeholder="Dupont" autocomplete="off" class="brix-input" type="text" value="" name="nom_famille" />
+      </div>
+      <div>
+        <label for="crit-prenom">Prénom</label>
+        <input id="crit-prenom" placeholder="Jean" autocomplete="off" class="brix-input" type="text" value="" name="prenom" />
+      </div>
+      <!-- decoys: not the family-name search field -->
+      <div>
+        <label for="crit-nom_naissance">Nom de naissance</label>
+        <input id="crit-nom_naissance" placeholder="Martin" autocomplete="off" class="brix-input" type="text" value="" name="nom_naissance" />
+      </div>
+      <div>
+        <label for="crit-nom_affichage">Nom affiché</label>
+        <input id="crit-nom_affichage" placeholder="Jean Dupont" autocomplete="off" class="brix-input" type="text" value="" name="nom_affichage" />
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="brix-btn brix-btn--primary" id="brix-submit">Rechercher</button>
+      <button type="button" class="brix-btn brix-btn--ghost" id="brix-clear">Effacer</button>
+    </div>
+  </form>
+
+  <!-- The real BrixHub is a SPA: results render below the form, in place.
+       No navigation happens. -->
+  <div id="brix-results"></div>
+
+  <script>
+    (function () {
+      var results = document.getElementById("brix-results");
+      var lastName = "";
+
+      function esc(s) {
+        return String(s).replace(/[&<>"]/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+        });
+      }
+
+      function kv(label, value) {
+        return '<div><dt>' + esc(label) + "</dt><dd><span>" + esc(value) + "</span></dd></div>";
+      }
+
+      function block(title, pairs) {
+        return (
+          '<section><p>' + esc(title) + "</p><dl>" + pairs.join("") + "</dl></section>"
+        );
+      }
+
+      function render() {
+        var prenom = (document.getElementById("crit-prenom").value || "").trim();
+        var nom = (document.getElementById("crit-nom_famille").value || "").trim();
+        if (!prenom && !nom) return;
+
+        var display = (prenom + " " + nom).trim().toUpperCase();
+
+        results.innerHTML = [
+          // screen-reader status line, exactly like the live site
+          '<p class="sr-only" role="status" aria-live="polite">Recherche terminée : 1 résultat.</p>',
+          '<section class="brix-card overflow-hidden">',
+          "<header><span>Résultats</span><span>1 profil</span><span>22 ms</span></header>",
+          '<article class="brix-result relative px-5 py-5">',
+          '<div class="flex flex-wrap items-start justify-between gap-3">',
+          '<div class="flex min-w-0 items-center gap-3"><div class="min-w-0">',
+          '<h3 class="truncate">' + esc(display) + "</h3>",
+          '<div class="mt-1.5 flex flex-wrap items-center gap-1.5">',
+          '<span class="rounded-full" title="Colis Privé (2025)"><span class="truncate">Colis Privé (2025)</span></span>',
+          '<span class="rounded-full" title="Ameli (2022)"><span class="truncate">Ameli (2022)</span></span>',
+          '<span class="rounded-full" title="FranceConnect"><span class="truncate">FranceConnect</span></span>',
+          "</div></div></div>",
+          '<div class="flex shrink-0 flex-wrap items-center gap-1.5">',
+          '<button type="button" class="brix-act">Approfondir</button>',
+          '<button type="button" class="brix-act">Copier</button>',
+          '<button type="button" class="brix-act">Supprimer</button>',
+          "</div></div>",
+          '<div class="mt-4 grid grid-cols-1 gap-x-8 gap-y-4">',
+          block("Identité", [
+            kv("Nom de famille", nom.toUpperCase()),
+            kv("Prénom", prenom.toUpperCase()),
+            kv("Nom d'utilisateur", "10008063603"),
+            kv("Civilité", "F")
+          ]),
+          block("Contact", [
+            kv("Adresse e-mail", (prenom + "." + nom).toLowerCase() + "@gmail.com"),
+            kv("Téléphone", "0651013400")
+          ]),
+          block("Adresse", [kv("Code postal", "31300"), kv("Ville", "Toulouse")]),
+          block("Professionnel", [
+            kv("Société", "CABINET DE " + display),
+            kv("Profession", "Psychomotricien")
+          ]),
+          "</div>",
+          '<div class="mt-3"><span>Profil consolidé depuis 4 sources</span></div>',
+          "</article></section>",
+
+          '<section class="brix-card brix-accent-live">',
+          '<header><span class="text-card">Arbre familial</span><span>60 profils · 30 foyers</span></header>',
+          '<div class="space-y-3">',
+          '<article class="rounded-[var(--radius-md)] border">',
+          '<div class="border-b px-4 py-3"><p class="truncate text-small">' +
+            esc(lastName ? lastName.toUpperCase() + " " : "") + '17 RUE LAGANNE</p>',
+          '<div class="mt-1 flex flex-wrap items-center gap-x-3 font-mono text-mini">',
+          "<span>31300 TOULOUSE</span><span>3 membres</span><span>Même adresse</span></div>",
+          '<div class="mt-2 flex flex-wrap gap-1.5">',
+          '<button type="button" title="Personnes liées à ce numéro">620775236</button>',
+          "</div></div>",
+          '<ul class="list-none">',
+          '<li class="group flex items-center justify-between gap-3"><div class="flex min-w-0 flex-1 items-center gap-3"><span>G</span>',
+          '<div class="min-w-0 flex-1"><p class="truncate text-small"><span class="font-medium">Ghislaine</span> <span>' +
+            esc(lastName.toUpperCase()) + "</span></p>",
+          '<p class="mt-0.5 flex flex-wrap gap-x-3 font-mono text-[11px]"><span>ghislaine@icloud.com</span>',
+          '<button type="button" title="Personnes liées à ce numéro">620775236</button></p></div></div></li>',
+          "</ul></article></div></section>"
+        ].join("");
+      }
+
+      document.getElementById("brix-submit").addEventListener("click", function (event) {
+        event.preventDefault(); // SPA: no navigation, results render in place
+        lastName = (document.getElementById("crit-nom_famille").value || "").trim();
+        render();
+      });
+
+      document.getElementById("brix-clear").addEventListener("click", function () {
+        results.innerHTML = "";
+      });
+    })();
+  </script>
+</body>
+</html>
